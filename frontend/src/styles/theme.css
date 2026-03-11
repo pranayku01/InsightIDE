@@ -1,0 +1,85 @@
+:root {
+  --bg-main: #0f1220;
+  --bg-panel: #1b1f35;
+  --bg-editor: #15182a;
+  --accent: #6c7cff;
+  --accent-soft: #8b96ff;
+  --border: #2a2f4a;
+  --text-main: #e6e8ff;
+  --text-dim: #9aa0d4;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.navbar {
+  height: 50px;
+  background: var(--bg-panel);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.main-layout {
+  display: flex;
+  height: calc(100vh - 100px);
+}
+
+.editor-section {
+  width: 70%;
+  background: var(--bg-editor);
+}
+
+.ai-panel {
+  width: 30%;
+  background: var(--bg-panel);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border);
+}
+
+.output-console {
+  height: 40%;
+  border-bottom: 1px solid var(--border);
+  padding: 10px;
+}
+
+.ai-suggestions {
+  height: 60%;
+  padding: 10px;
+}
+
+.bottom-bar {
+  height: 50px;
+  background: var(--bg-panel);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  border-top: 1px solid var(--border);
+}
+
+button {
+  background: var(--accent);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--accent-soft);
+}
+
+select {
+  background: var(--bg-editor);
+  border: 1px solid var(--border);
+  color: white;
+  padding: 6px;
+}

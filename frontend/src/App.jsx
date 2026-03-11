@@ -1,7 +1,7 @@
-import CodeEditor from "./components/codeEditor";
+import EditorPage from "./pages/editorPage";
 
 function App() {
-  return <CodeEditor />;
+  return <EditorPage />;
 }
 
 export default App;
