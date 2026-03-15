@@ -4,28 +4,31 @@ import AiPanel from "../components/aiPanel";
 
 function EditorPage() {
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+    <div className="app-container">
       
       <Navbar />
 
-      <div style={{ display: "flex", flex: 1 }}>
-        <div style={{ width: "70%" }}>
+      <div className="main-layout">
+        <div className="editor-section">
           <CodeEditor />
         </div>
 
         <AiPanel />
       </div>
 
-      <div style={{ height: "50px", background: "#111", display: "flex", alignItems: "center", gap: "10px", padding: "10px" }}>
-        <button>Run</button>
-        <button>Analyze</button>
+      <div className="bottom-bar">
+        <button className="run-btn">▶ Run</button>
+        <button className="analyze-btn">✨ Analyze</button>
 
-        <select>
-          <option>JavaScript</option>
-          <option>Python</option>
-          <option>Java</option>
-          <option>C++</option>
-        </select>
+        <div className="lang-select-wrapper">
+          <span>Language:</span>
+          <select>
+            <option>JavaScript</option>
+            <option>Python</option>
+            <option>Java</option>
+            <option>C++</option>
+          </select>
+        </div>
       </div>
 
     </div>
