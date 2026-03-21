@@ -1,3 +1,4 @@
+import { PanelGroup, Panel, PanelResizeHandle } from "react-resizable-panels";
 import Navbar from "../components/navbar";
 import CodeEditor from "../components/codeEditor";
 import AiPanel from "../components/aiPanel";
@@ -9,11 +10,19 @@ function EditorPage() {
       <Navbar />
 
       <div className="main-layout">
-        <div className="editor-section">
-          <CodeEditor />
-        </div>
-
-        <AiPanel />
+        <PanelGroup direction="horizontal">
+          <Panel defaultSize={60} minSize={20}>
+            <div className="editor-section">
+              <CodeEditor />
+            </div>
+          </Panel>
+          
+          <PanelResizeHandle className="custom-resize-handle" />
+          
+          <Panel defaultSize={40} minSize={20}>
+            <AiPanel />
+          </Panel>
+        </PanelGroup>
       </div>
 
       <div className="bottom-bar">
