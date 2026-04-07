@@ -1,15 +1,20 @@
 const axios=require("axios");
 
 const languageMap = {
-  cpp: "gcc-head",
-  python: "cpython-3.10.2",
-  rust: "rust-head",
-  go: "go-head",
-  javascript: "nodejs-head"
+  "c++": "gcc-head",
+  python: "cpython-3.14.0",
+  rust: "rust-1.82.0",
+  go: "go-1.23.2",
+  javascript: "nodejs-20.17.0",
+  java: "openjdk-head"
 };
 
 const executeCode = async ({ code, language, input }) => {
-  const compiler = languageMap[language];
+  const compiler = languageMap[language.toLowerCase()];
+  
+  if (!compiler) {
+    throw new Error(`Unsupported language: ${language}`);
+  }
   const response = await axios.post(
     "https://wandbox.org/api/compile.json",
     {

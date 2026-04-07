@@ -3,7 +3,7 @@ import OutputConsole from "./outputConsole";
 import InputConsole from "./inputConsole";
 import AiSuggestions from "./aiSuggestions";
 
-function AiPanel() {
+function AiPanel({ input, setInput, output, error, isLoading }) {
   return (
     <div className="ai-panel">
       <PanelGroup direction="vertical">
@@ -16,11 +16,11 @@ function AiPanel() {
         <Panel defaultSize={60} minSize={20}>
           <PanelGroup direction="horizontal">
             <Panel defaultSize={50} minSize={20}>
-              <InputConsole />
+              <InputConsole input={input} setInput={setInput} />
             </Panel>
             <PanelResizeHandle className="custom-resize-handle" />
             <Panel defaultSize={50} minSize={20}>
-              <OutputConsole />
+              <OutputConsole output={output} error={error} isLoading={isLoading} />
             </Panel>
           </PanelGroup>
         </Panel>
