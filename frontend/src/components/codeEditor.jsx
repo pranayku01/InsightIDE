@@ -1,12 +1,15 @@
 import Editor from "@monaco-editor/react";
 
-function CodeEditor() {
+function CodeEditor({ code, setCode, language }) {
+  const monacoLanguage = language === "C++" ? "cpp" : language.toLowerCase();
+
   return (
     <div style={{ padding: "15px", height: "100%", width: "100%", boxSizing: "border-box" }}>
       <Editor
         height="100%"
-        defaultLanguage="javascript"
-        defaultValue="// Start coding..."
+        language={monacoLanguage}
+        value={code}
+        onChange={(value) => setCode(value || "")}
         theme="vs-dark"
         options={{
           minimap: { enabled: false },
