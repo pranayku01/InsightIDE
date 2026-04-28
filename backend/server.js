@@ -1,10 +1,10 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config(); // MUST BE HERE BEFORE ROUTES!
+
 const executeRoutes = require("./routes/executeRoutes.js");
 const aiRoutes = require("./routes/aiRoutes.js");
-const dotenv = require("dotenv");
 const cors = require("cors");
-
-dotenv.config();
 
 const app = express();
 

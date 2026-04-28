@@ -11,6 +11,8 @@ function EditorPage() {
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [aiResponse, setAiResponse] = useState("");
+  const [isAiLoading, setIsAiLoading] = useState(false);
 
   const handleRunCode = async () => {
     setIsLoading(true);
@@ -53,6 +55,37 @@ function EditorPage() {
     }
   };
 
+  const handleAnalyzeCode = async () => {
+    setIsAiLoading(true);
+    setAiResponse("");
+
+    try {
+      const response = await fetch("http://localhost:3000/api/ai/analyze", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          code: code,
+          language: language
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setAiResponse("Error: " + (data.error || "Failed to analyze code."));
+      } else {
+        setAiResponse(data.data);
+      }
+    } catch (err) {
+      console.error(err);
+      setAiResponse("Network Error: Make sure the backend server runs on Port 3000.");
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
+
   return (
     <div className="app-container">
       
@@ -69,13 +102,15 @@ function EditorPage() {
           <PanelResizeHandle className="custom-resize-handle" />
           
           <Panel defaultSize={40} minSize={20}>
-            <AiPanel 
-              input={input} 
-              setInput={setInput} 
-              output={output} 
-              error={error} 
-              isLoading={isLoading} 
-            />
+              <AiPanel 
+                input={input} 
+                setInput={setInput} 
+                output={output} 
+                error={error} 
+                isLoading={isLoading}
+                aiResponse={aiResponse}
+                isAiLoading={isAiLoading}
+              />
           </Panel>
         </PanelGroup>
       </div>
@@ -89,7 +124,14 @@ function EditorPage() {
         >
           {isLoading ? "Running..." : "▶ Run"}
         </button>
-        <button className="analyze-btn">✨ Analyze</button>
+        <button 
+          className="analyze-btn" 
+          onClick={handleAnalyzeCode}
+          disabled={isAiLoading}
+          style={{ opacity: isAiLoading ? 0.7 : 1, cursor: isAiLoading ? "not-allowed" : "pointer" }}
+        >
+          {isAiLoading ? "Analyzing..." : "✨ Analyze"}
+        </button>
 
         <div className="lang-select-wrapper">
           <span>Language:</span>
